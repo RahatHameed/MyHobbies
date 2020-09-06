@@ -36,6 +36,7 @@
                         <a class="nav-link {{ Request::is('/')? 'active': '' }}" href="/">Start</a>
                         <a class="nav-link {{ Request::is('/')? 'active': '' }}" href="/info">Info</a>
                         <a class="nav-link {{ Request::is('hobby*')? 'active': '' }}" href="/hobby">Hobbies</a>
+                        <a class="nav-link {{ Request::is('tag*')? 'active': '' }}" href="/tag">Tags</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
