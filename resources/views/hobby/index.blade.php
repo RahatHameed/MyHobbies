@@ -37,7 +37,7 @@
                                     <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                                     <br>
                                     @foreach($hobby->tags as $tag)
-                                        <a href="{{route('HobbyTag', ['tag_id' => $tag->id])}}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                        <a href="{{route('FilterHobbiesByTagID', ['tag_id' => $tag->id])}}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                     @endforeach
                                 </li>
                             @endforeach

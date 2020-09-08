@@ -31,4 +31,6 @@ Route::resource('user', 'UserController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/hobby/tag/{tag_id}', 'HobbyTagController@getFilteredHobbies')->name('HobbyTag');
+Route::get('/hobby/tag/{tag_id}', 'HobbyTagController@getFilteredHobbies')->name('FilterHobbiesByTagID');
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/attach', 'HobbyTagController@attachTag')->name('attachTag');
+Route::get('/hobby/{hobby_id}/tag/{tag_id}/detach', 'HobbyTagController@detachTag')->name('detachTag');
