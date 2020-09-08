@@ -5,7 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">Hobbies List</div>
+                    @isset($filter)
+                        <div class="card-header">Filtered Hobbies by
+                            <span style="font-size: 130%;" class="badge badge-{{ $filter->style }}">{{ $filter->name }}</span>
+                            <span class="float-right"><a href="{{route('hobby.index')}}">Show All Hobbies</a></span>
+                        </div>
+                    @else
+                        <div class="card-header">All Hobbies List</div>
+                    @endisset
 
                     <div class="card-body">
                         <ul class="list-group">
@@ -17,7 +24,7 @@
                                     @endauth
 
                                     <span class="mx-2">Posted By:
-                                        <a href="user/{{$hobby->user->id}}">{{ $hobby->user->name }} </a>
+                                        <a href="/user/{{$hobby->user->id}}">{{ $hobby->user->name }} </a>
                                         ({{$hobby->user->hobbies->count()}} Hobbies)</span>
 
                                     @auth
@@ -30,7 +37,7 @@
                                     <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                                     <br>
                                     @foreach($hobby->tags as $tag)
-                                        <a href=""><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                        <a href="{{route('HobbyTag', ['tag_id' => $tag->id])}}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                     @endforeach
                                 </li>
                             @endforeach
