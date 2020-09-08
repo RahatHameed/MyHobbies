@@ -52,6 +52,7 @@ class HobbyController extends Controller
         $hobby =  new Hobby([
             'name' => $request->name,
             'description' => $request->description,
+            'user_id' => auth()->id(),
         ]);
 
         $hobby->save();
