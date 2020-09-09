@@ -20,6 +20,7 @@
                                         @method('DELETE')
                                         <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Delete">
                                     </form>
+                                    <span class="float-right"><a href="{{route('FilterHobbiesByTagID', ['tag_id' => $tag->id])}}"> Used {{$tag->hobbies()->count()}} times</a></span>
                                 </li>
                             @endforeach
                         </ul>
