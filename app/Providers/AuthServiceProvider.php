@@ -24,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('connect_hobbyTag',function($user, $hobby){
+               return $user->id === $hobby->user_id || auth()->user->role ==='admin';
+        });
 
         //
     }
