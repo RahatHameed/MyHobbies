@@ -155,6 +155,7 @@ class HobbyController extends Controller
      */
     public function destroy(Hobby $hobby)
     {
+        abort_unless(Gate::allows('delete', $hobby), 403);
         $OldHobby = $hobby->name;
         $hobby->delete();
 
