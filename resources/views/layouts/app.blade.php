@@ -34,14 +34,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <a class="nav-link {{ Request::is('/home') ? 'active' : '' }}" href="/home">Dashboard</a>
+                        <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home">Dashboard</a>
                         @endauth
 
                         @guest
                         <a class="nav-link {{ Request::is('/') ? ' active' : '' }}" href="/">Start</a>
                         @endguest
 
-                        <a class="nav-link {{ Request::is('/')? 'active': '' }}" href="/info">Info</a>
+                        <a class="nav-link {{ Request::is('info')? 'active': '' }}" href="/info">Info</a>
                         <a class="nav-link {{ Request::is('hobby*')? 'active': '' }}" href="/hobby">Hobbies</a>
                         <a class="nav-link {{ Request::is('tag*')? 'active': '' }}" href="/tag">Tags</a>
                     </ul>
