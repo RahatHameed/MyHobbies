@@ -20,7 +20,7 @@
                             @foreach($hobbies as $hobby)
                                 <li class="list-group-item">
                                     <a title="Show Details" href="/hobby/{{ $hobby->id }}">
-                                        <img src="/img/thumb_landscape.jpg" alt="thumb">
+                                        <img src="/img/hobbies/{{ $hobby->id }}_thumb.jpg" alt="Hobby Thumb">
                                         {{ $hobby->name }}
                                     </a>
                                     @auth

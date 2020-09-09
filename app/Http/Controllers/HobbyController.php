@@ -62,6 +62,10 @@ class HobbyController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+        if ($request->image) {
+            $this->saveImages($request->image, $hobby->id);
+        }
+
         $hobby->save();
 
 /*        return $this->index()->with([
@@ -122,24 +126,7 @@ class HobbyController extends Controller
         ]);
 
         if ($request->image) {
-            $image = Image::make($request->image);
-            if ( $image->width() > $image->height() ) { // Landscape
-                $image->widen(1200)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_large.jpg")
-                    ->widen(400)->pixelate(12)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_pixelated.jpg");
-                $image = Image::make($request->image);
-                $image->widen(60)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_thumb.jpg");
-            } else { // Portrait
-                $image->heighten(900)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_large.jpg")
-                    ->heighten(400)->pixelate(12)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_pixelated.jpg");
-                $image = Image::make($request->image);
-                $image->heighten(60)
-                    ->save(public_path() . "/img/hobbies/" . $hobby->id . "_thumb.jpg");
-            }
+            $this->saveImages($request->image, $hobby->id);
         }
 
         $hobby->update([
@@ -167,5 +154,28 @@ class HobbyController extends Controller
         return $this->index()->with([
             "message_success" => "This hobby <b>". $OldHobby."</b> has been deleted."
         ]);
+    }
+
+    public function saveImages($imageInput, $hobby_id){
+
+        $image = Image::make($imageInput);
+        if ( $image->width() > $image->height() ) { // Landscape
+            $image->widen(1200)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_large.jpg")
+                ->widen(400)->pixelate(12)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_pixelated.jpg");
+            $image = Image::make($imageInput);
+            $image->widen(60)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_thumb.jpg");
+        } else { // Portrait
+            $image->heighten(900)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_large.jpg")
+                ->heighten(400)->pixelate(12)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_pixelated.jpg");
+            $image = Image::make($imageInput);
+            $image->heighten(60)
+                ->save(public_path() . "/img/hobbies/" . $hobby_id . "_thumb.jpg");
+        }
+
     }
 }
