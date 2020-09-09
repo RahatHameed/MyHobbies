@@ -18,7 +18,12 @@
                                     @if($user->hobbies->count() > 0)
                                         @foreach($user->hobbies as $hobby)
                                             <li class="list-group-item">
-                                                <a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+                                                @if(file_exists('img/hobbies/' . $hobby->id . '_thumb.jpg'))
+                                                    <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                                        <img src="/img/hobbies/{{ $hobby->id }}_thumb.jpg" alt="Hobby Thumb">
+                                                    </a>
+                                                @endif
+                                                &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
                                                 <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                                                 <br>
                                                 @foreach($hobby->tags as $tag)
@@ -34,12 +39,12 @@
                                 @endif
                             </div>
                             <div class="col-md-3">
-                                @if(file_exists('img/hobbies/' . $hobby->id . '_thumb.jpg'))
-                                    <a title="Show Details" href="/hobby/{{ $hobby->id }}">
-                                        <img src="/img/hobbies/{{ $hobby->id }}_thumb.jpg" alt="Hobby Thumb">
-                                    </a>
+                                @if(Auth::user() && file_exists('img/users/' . $user->id . '_large.jpg'))
+                                    <img class="img-thumbnail" src="/img/users/{{$user->id}}_large.jpg" alt="{{ $user->name }}">
                                 @endif
-                                &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+                                @if(!Auth::user() && file_exists('img/users/' . $user->id . '_pixelated.jpg'))
+                                    <img class="img-thumbnail" src="/img/users/{{$user->id}}_pixelated.jpg" alt="{{ $user->name }}">
+                                @endif
                             </div>
                         </div>
 
